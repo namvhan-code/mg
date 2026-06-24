@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MAGGIE Payment</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+            min-height: 100vh;
+        }
+        
+        @keyframes float-up-down {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(10deg); }
+        }
+        @keyframes float-left-right {
+            0%, 100% { transform: translateX(0px) rotate(0deg); }
+            50% { transform: translateX(15px) rotate(-10deg); }
+        }
+        @keyframes pulse-soft {
+            0%, 100% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+        @keyframes spin-slow { 100% { transform: rotate(360deg); } }
+
+        @keyframes dash-animation {
+            from { stroke-dashoffset: 0; }
+            to { stroke-dashoffset: -24; }
+        }
+        .animate-dash {
+            animation: dash-animation 1s linear infinite;
+        }
+
+        .anim-float-1 { animation: float-up-down 4s ease-in-out infinite; }
+        .anim-float-2 { animation: float-up-down 5s ease-in-out infinite 1.5s; }
+        .anim-float-3 { animation: float-left-right 6s ease-in-out infinite; }
+        .anim-float-4 { animation: float-left-right 4.5s ease-in-out infinite 2s; }
+        .anim-pulse { animation: pulse-soft 3s ease-in-out infinite; }
+        .anim-spin { animation: spin-slow 8s linear infinite; }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 1);
+            box-shadow: 0 20px 50px -10px rgba(16, 185, 129, 0.15), 
+                        inset 0 2px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .virtual-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .virtual-card:hover {
+            transform: translateY(-4px);
+        }
+        .virtual-card:active {
+            transform: translateY(2px) scale(0.98);
+        }
+        
+        ::-webkit-scrollbar {
+            width: 0px;
+        }
+    </style>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        green: {
+                            500: '#84cc16',
+                            600: '#65a30d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="flex flex-col items-center py-6 px-4 text-green-800 relative overflow-x-hidden">
+
+    <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
+        <!-- SVG decorations removed to maintain strict request -->
+    </div>
+
+    <div id="toast" class="fixed bottom-8 left-1/2 transform -translate-x-1/2 bg-green-600/95 backdrop-blur-sm text-white px-6 py-3 rounded-full shadow-xl transition-all duration-300 opacity-0 translate-y-4 pointer-events-none z-50 flex items-center gap-2 font-medium text-sm border border-green-400">
+        คัดลอกข้อมูลแล้ว
+    </div>
+
+    <div class="max-w-[420px] w-full relative z-10 space-y-5 pb-10">
+        
+        <div class="text-center pt-2 pb-2 relative">
+            <h1 class="text-3xl font-bold tracking-tight text-green-600">MAGGIE</h1>
+            <p class="text-sm font-medium text-green-500 mt-1">Payment & Checkout</p>
+        </div>
+
+        <div class="glass-card rounded-[40px] p-3 relative z-10">
+            <div class="relative p-2 rounded-[36px] z-10">
+                <div class="rounded-[28px] overflow-hidden relative shadow-sm border-[4px] border-white">
+                    <img src="265691db-7c48-437a-a747-6e512747933a.jfif" alt="QR Payment MAGGIE" class="w-full h-auto object-cover">
+                </div>
+            </div>
+
+            <div class="p-4 pt-6 space-y-5">
+                
+                <div class="space-y-4">
+                    <!-- Wallet -->
+                    <div class="virtual-card relative bg-gradient-to-br from-green-400 to-green-500 rounded-[24px] p-5 shadow-lg shadow-green-400/20 cursor-pointer border border-green-300/50" onclick="copyText('096-862-7749', this)">
+                        <div class="relative z-10 flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <div class="text-white font-bold tracking-wider">𝘞𝘢𝘭𝘭𝘦𝘵 𓏬</div>
+                                <div class="bg-white/20 text-white text-[10px] font-bold px-3 py-1 rounded-full">คัดลอก</div>
+                            </div>
+                            <div class="text-white font-bold text-[22px] tracking-widest">096-862-7749</div>
+                            <div class="text-white/90 text-xs">⋆˙⟡ ชื่อบช: เมธาวี รัตนภาค</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center text-green-400 font-bold tracking-widest">-ˋˏ✄┈┈┈┈┈┈┈┈┈┈</div>
+
+                    <!-- K-Plus -->
+                    <div class="virtual-card relative bg-gradient-to-br from-green-500 to-green-600 rounded-[24px] p-5 shadow-lg shadow-green-500/20 cursor-pointer border border-green-300/30" onclick="copyText('173-1-26287-6', this)">
+                        <div class="relative z-10 flex flex-col gap-2">
+                            <div class="flex justify-between items-center">
+                                <div class="text-white font-bold tracking-wider">ꕀ 𝘒 𝘗𝘭𝘶𝘴 𓏬</div>
+                                <div class="bg-white/20 text-white text-[10px] font-bold px-3 py-1 rounded-full">คัดลอก</div>
+                            </div>
+                            <div class="text-white font-bold text-[22px] tracking-widest">173-1-26287-6</div>
+                            <div class="text-white/90 text-xs">⋆˙⟡ ชื่อบช: เมธาวี รัตนภาค</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-green-100/90 border border-green-200 rounded-2xl p-3 text-center text-[13px] text-green-800 font-medium">
+                    แปะสลิปเป็นหลักฐานด้วยทุกครั้งค่ะ
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function copyText(text, element) {
+            navigator.clipboard.writeText(text);
+            const toast = document.getElementById('toast');
+            toast.style.opacity = '1';
+            toast.style.transform = 'translate(-50%, 0)';
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translate(-50%, 1rem)';
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
